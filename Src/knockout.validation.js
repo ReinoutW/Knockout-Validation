@@ -57,6 +57,7 @@
         errorsAsTitleOnModified: false, // shows the error when hovering the input field (decorateElement must be true)
         messageTemplate: null,
         insertMessages: true,           // automatically inserts validation messages as <span></span>
+        insertMessageAfterClass: null,  // the class of the element after which the validation message span should be rendered. BGy default this is null, indicating the message span will be rendered after the active element.
         parseInputAttributes: false,    // parses the HTML5 validation attribute from a form element and adds that to the object
         writeInputAttributes: false,    // adds HTML5 input validation attributes to form elements that ko observable's are bound to
         decorateElement: false,         // false to keep backward compatibility
@@ -438,9 +439,20 @@
 
             //creates a span next to the @element with the specified error class
             insertValidationMessage: function (element) {
-                var span = document.createElement('SPAN');
-                span.className = utils.getConfigOptions(element).errorMessageClass;
-                utils.insertAfter(element, span);
+                var span = document.createElement('SPAN'),
+                    config = utils.getConfigOptions(element),
+                    $element = element,
+                    elementUsedForInsert = element,
+                    insertMessageAfterClass = config.insertMessageAfterClass,
+                    elements;
+                span.className = config.errorMessageClass;
+                if (insertMessageAfterClass) {
+                    elements = $element.next("." + insertMessageAfterClass);
+                    if (elements.length > 0) {
+                        elementUsedForInsert = elements[0];
+                    }
+                }                
+                utils.insertAfter(elementUsedForInsert, span);
                 return span;
             },
 
