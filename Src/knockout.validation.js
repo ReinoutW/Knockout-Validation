@@ -57,7 +57,7 @@
         errorsAsTitleOnModified: false, // shows the error when hovering the input field (decorateElement must be true)
         messageTemplate: null,
         insertMessages: true,           // automatically inserts validation messages as <span></span>
-        insertMessageAfterClass: null,  // the class of the element after which the validation message span should be rendered. BGy default this is null, indicating the message span will be rendered after the active element.
+        insertMessageAfterClass: null,  // the class of the element after which the validation message span should be rendered. By default this is null, indicating the message span will be rendered after the active element.
         parseInputAttributes: false,    // parses the HTML5 validation attribute from a form element and adds that to the object
         writeInputAttributes: false,    // adds HTML5 input validation attributes to form elements that ko observable's are bound to
         decorateElement: false,         // false to keep backward compatibility
